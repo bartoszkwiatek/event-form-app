@@ -9,10 +9,7 @@ class EventsController {
 
     public async create(data: EventBody): Promise<EventBody | Error> {
         try {
-            const { firstName, lastName, email, eventDate } = await this.model.create({
-                ...data,
-                eventDate: new Date(),
-            });
+            const { firstName, lastName, email, eventDate } = await this.model.create(data);
             return { firstName, lastName, email, eventDate };
         } catch (error) {
             return error as Error;
