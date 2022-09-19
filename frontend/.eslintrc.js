@@ -37,7 +37,7 @@ module.exports = {
         'consistent-return': 'warn',
         'no-eval': 'error',
         complexity: ['error', { max: 50 }],
-        'max-lines-per-function': ['warn', { max: 50 }],
+        'max-lines-per-function': ['warn', { max: 100 }],
         'react/jsx-uses-react': 'off',
         'react/react-in-jsx-scope': 'off',
         '@typescript-eslint/type-annotation-spacing': ['warn'],
