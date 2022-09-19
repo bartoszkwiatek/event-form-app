@@ -13,3 +13,26 @@ docker compose up
 docker compose stop
 ```
 
+## Backend endpoints
+### Create new event
+
+```
+POST localhost:4000/events/
+```
+
+| Status code | Description |
+| ----------- | ----------- |
+| 201 | Created |
+| 500 | Internal server error |
+
+
+### Get all events
+
+```
+GET localhost:4000/events/
+```
+
+| Status code | Description |
+| ----------- | ----------- |
+| 200 | Ok |
+| 500 | Internal server error |
