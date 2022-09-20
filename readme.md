@@ -13,6 +13,21 @@ docker compose up
 docker compose stop
 ```
 
+In order to run tests packages need to be installed locally
+```bash
+cd frontend
+npm install
+```
+
+## Tests
+In order to run tests packages need to be installed using `npm install`
+
+### Frontend unit tests
+```bash
+npm test
+```
+
+
 ## Backend endpoints 
 ### Create new event
 
@@ -85,3 +100,5 @@ GET localhost:4000/events/
 | ----------- | ----------- |
 | 200 | Ok |
 | 500 | Internal server error |
+
+
