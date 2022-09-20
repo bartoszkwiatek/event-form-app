@@ -16,13 +16,13 @@ export const DisplayError = ({
     if (isError(error))
         return (
             <div>
-                <p>error.message</p>
+                <p data-testid="display-error-message">{error.message}</p>
             </div>
         );
     return (
         <div>
             {Object.entries(error).map(([key, value]) => (
-                <p key={key}>
+                <p data-testid="display-error-message" key={key}>
                     {key}: {value}
                 </p>
             ))}
