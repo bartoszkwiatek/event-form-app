@@ -5,51 +5,44 @@ import { DatePicker } from '../../../common/components/DatePicker';
 import { TextInput } from '../../../common/components/TextInput';
 import { formSchema } from '../models/formSchema';
 import { InputValues, ValidationOutputError } from '../models/types';
+import { DisplayError } from './DisplayError';
+import { DisplayLoading } from './DisplayLoading';
+import { DisplaySuccess } from './DisplaySuccess';
 
-export const EventForm = () => {
-    const url = 'http://localhost:4000/events';
+const url = 'http://localhost:4000/events';
 
+export const EventForm = (): ReactElement => {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState<null | ValidationOutputError | Error>(null);
     const [success, setSuccess] = useState(false);
 
-    const postForm = async (values: InputValues) => {
+    const postForm = async (values: InputValues): Promise<boolean> => {
         setLoading(true);
+        setError(null);
+        setSuccess(false);
+
         const response = await fetch(url, {
             method: 'POST',
             body: JSON.stringify(values),
-            // headers: {
-            //     'Content-Type': 'application/json',
-            // },
+            headers: {
+                'Content-Type': 'application/json',
+            },
         });
         const responseData = await response.json();
         setLoading(false);
         if (response.status === 500 || response.status === 422) {
             setError(responseData);
-            setSuccess(false);
+            return false;
         }
         if (response.status === 201) {
             setSuccess(true);
+            return true;
         }
-        setLoading(false);
-    };
-
-    const clear = () => {
-        setError(null);
-        setSuccess(false);
-    };
-
-    const displayError = (error: ValidationOutputError | Error): ReactElement => {
-        console.log(error instanceof Error);
-        return <p>{JSON.stringify(error)}</p>;
+        return false;
     };
 
     return (
         <>
-            {loading && <p>loading</p>}
-            {!loading && <p>not loading</p>}
-            {success && <p>Event saved</p>}
-            {error && displayError(error)}
             <Formik
                 initialValues={{
                     firstName: '',
@@ -58,9 +51,11 @@ export const EventForm = () => {
                     eventDate: '',
                 }}
                 validationSchema={formSchema}
-                onSubmit={async (values, { setSubmitting }) => {
-                    await postForm(values);
+                onSubmit={async (values, { setSubmitting, resetForm }) => {
+                    const success = await postForm(values);
+
                     setSubmitting(false);
+                    if (success) resetForm();
                 }}
             >
                 <Form>
@@ -87,6 +82,9 @@ export const EventForm = () => {
                     <button type="submit">Submit</button>
                 </Form>
             </Formik>
+            <DisplayLoading loading={loading} />
+            <DisplayError error={error} />
+            <DisplaySuccess success={success} />
         </>
     );
 };
