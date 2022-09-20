@@ -1,4 +1,5 @@
 import { FieldHookConfig, useField, useFormikContext } from 'formik';
+import './DatePicker.scss';
 
 export const DatePicker = (
     props: FieldHookConfig<string> & { label: string; 'data-testid': string },
@@ -6,9 +7,10 @@ export const DatePicker = (
     const { setFieldValue } = useFormikContext();
     const [field, meta] = useField(props);
     return (
-        <div data-testid={props['data-testid']}>
+        <div className="date-picker" data-testid={props['data-testid']}>
             <label htmlFor={props.name}>{props.label}</label>
             <input
+                className="input"
                 type="date"
                 {...field}
                 placeholder={props.placeholder}

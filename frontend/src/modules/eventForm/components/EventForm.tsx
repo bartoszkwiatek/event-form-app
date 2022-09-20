@@ -8,6 +8,7 @@ import { InputValues, ValidationOutputError } from '../models/types';
 import { DisplayError } from './DisplayError';
 import { DisplayLoading } from './DisplayLoading';
 import { DisplaySuccess } from './DisplaySuccess';
+import './EventForm.scss';
 
 const url = 'http://localhost:4000/events';
 
@@ -43,6 +44,7 @@ export const EventForm = (): ReactElement => {
 
     return (
         <div className="event-form" data-testid="event-form">
+            <h2 className="event-form-title">Create event</h2>
             <Formik
                 initialValues={{
                     firstName: '',
@@ -85,10 +87,11 @@ export const EventForm = (): ReactElement => {
                         name="eventDate"
                         data-testid="event-date-input"
                     />
-
-                    <button type="submit" data-testid="submit-button">
-                        Submit
-                    </button>
+                    <div className="button-container">
+                        <button type="submit" data-testid="submit-button">
+                            Submit
+                        </button>
+                    </div>
                 </Form>
             </Formik>
             <DisplayLoading loading={loading} />

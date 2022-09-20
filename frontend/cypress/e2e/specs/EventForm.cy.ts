@@ -1,4 +1,4 @@
-import { testIds, testidSelector } from '../../../src/modules/eventForm/__tests__/testIds';
+import { testIds, testidSelector } from '../../../src/modules/eventForm/tests/testIds';
 import { errorMessages } from '../../../src/modules/eventForm/models/formSchema';
 
 describe('Testing EventForm', () => {
