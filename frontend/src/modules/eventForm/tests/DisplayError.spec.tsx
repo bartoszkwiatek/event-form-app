@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 
-import { testIds } from '../common/testIds';
-import { DisplayError } from '../../modules/eventForm/components/DisplayError';
+import { testIds } from './testIds';
+import { DisplayError } from '../components/DisplayError';
 
 describe('Test display error component with different props', () => {
     test('No error', () => {

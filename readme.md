@@ -20,13 +20,19 @@ npm install
 ```
 
 ## Tests
-In order to run tests packages need to be installed using `npm install`
+In order to run tests, packages need to be installed locally using `npm install`
 
 ### Frontend unit tests
 ```bash
 npm test
 ```
 
+### Frontend e2e tests
+To run e2e project must be running in docker 
+```bash
+docker compose up
+npm test:e2e
+```
 
 ## Backend endpoints 
 ### Create new event
