@@ -1,14 +1,16 @@
-/* eslint-disable */
-// @ts-nocheck
-import { useField } from 'formik';
-export const TextInput = ({ label, ...props }) => {
-    // useField() returns [formik.getFieldProps(), formik.getFieldMeta()]
-    // which we can spread on <input> and alse replace ErrorMessage entirely.
+import { FieldHookConfig, useField } from 'formik';
+
+export const TextInput = (props: FieldHookConfig<string> & { label: string }) => {
     const [field, meta] = useField(props);
     return (
         <>
-            <label htmlFor={props.id || props.name}>{label}</label>
-            <input className="text-input" {...field} {...props} />
+            <label htmlFor={props.name}>{props.label}</label>
+            <input
+                className="text-input"
+                {...field}
+                placeholder={props.placeholder}
+                type={props.type}
+            />
             {meta.touched && meta.error ? <div className="error">{meta.error}</div> : null}
         </>
     );

@@ -1,16 +1,15 @@
-/* eslint-disable */
-// @ts-nocheck
-import { useField, useFormikContext } from 'formik';
+import { FieldHookConfig, useField, useFormikContext } from 'formik';
 
-export const DatePicker = ({ ...props }) => {
+export const DatePicker = (props: FieldHookConfig<string> & { label: string }) => {
     const { setFieldValue } = useFormikContext();
     const [field, meta] = useField(props);
     return (
         <>
+            <label htmlFor={props.name}>{props.label}</label>
             <input
                 type="date"
                 {...field}
-                {...props}
+                placeholder={props.placeholder}
                 onChange={event => {
                     setFieldValue(field.name, event.target.value);
                 }}
