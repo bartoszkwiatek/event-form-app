@@ -1,10 +1,12 @@
 import { FieldHookConfig, useField, useFormikContext } from 'formik';
 
-export const DatePicker = (props: FieldHookConfig<string> & { label: string }) => {
+export const DatePicker = (
+    props: FieldHookConfig<string> & { label: string; 'data-testid': string },
+) => {
     const { setFieldValue } = useFormikContext();
     const [field, meta] = useField(props);
     return (
-        <>
+        <div data-testid={props['data-testid']}>
             <label htmlFor={props.name}>{props.label}</label>
             <input
                 type="date"
@@ -15,6 +17,6 @@ export const DatePicker = (props: FieldHookConfig<string> & { label: string }) =
                 }}
             />
             {meta.touched && meta.error ? <div className="error">{meta.error}</div> : null}
-        </>
+        </div>
     );
 };

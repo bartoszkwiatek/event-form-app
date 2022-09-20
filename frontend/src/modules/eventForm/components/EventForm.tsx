@@ -42,7 +42,7 @@ export const EventForm = (): ReactElement => {
     };
 
     return (
-        <>
+        <div className="event-form" data-testid="event-form">
             <Formik
                 initialValues={{
                     firstName: '',
@@ -64,27 +64,36 @@ export const EventForm = (): ReactElement => {
                         name="firstName"
                         type="text"
                         placeholder="First name"
+                        data-testid="first-name-input"
                     />
                     <TextInput
                         label="Last name"
                         name="lastName"
                         type="text"
                         placeholder="Last name"
+                        data-testid="last-name-input"
                     />
                     <TextInput
                         label="Email address"
                         name="email"
                         type="email"
                         placeholder="address@domain.com"
+                        data-testid="email-input"
                     />
-                    <DatePicker label="Event date" name="eventDate" />
+                    <DatePicker
+                        label="Event date"
+                        name="eventDate"
+                        data-testid="event-date-input"
+                    />
 
-                    <button type="submit">Submit</button>
+                    <button type="submit" data-testid="submit-button">
+                        Submit
+                    </button>
                 </Form>
             </Formik>
             <DisplayLoading loading={loading} />
             <DisplayError error={error} />
             <DisplaySuccess success={success} />
-        </>
+        </div>
     );
 };

@@ -27,6 +27,6 @@
   },
   "include": [
     "src",
-    "tests"
-  ]
+    "cypress/e2e/specs/"  
+]
 }

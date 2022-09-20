@@ -1,4 +1,4 @@
-import { formSchema, errorMessages } from '../../modules/eventForm/models/formSchema';
+import { formSchema, errorMessages } from '../models/formSchema';
 
 describe('Client form validation', () => {
     it('Should be valid', () => {
