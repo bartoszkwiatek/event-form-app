@@ -4,7 +4,7 @@ import express, { Express } from 'express';
 
 import { RootController } from 'src/controllers/RootController';
 
-import { createRouter } from './router';
+import { createRouter } from '../routes/router';
 
 export function initApp(RootController: RootController): Express {
     const app = express();
