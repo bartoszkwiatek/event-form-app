@@ -1,11 +1,12 @@
 import { initApp } from './config/app';
 import { createRootController } from './controllers/RootController';
-import './config/database';
+import { Connection } from './config/database';
 
 const PORT = process.env.PORT || 4000;
 
+export const db = new Connection();
 const rootService = createRootController();
-const app = initApp(rootService);
+export const app = initApp(rootService);
 
-// eslint-disable-next-line no-console
-app.listen(PORT, () => console.log(`App running on port ${PORT}`));
+if (process.env.NODE_ENV !== 'test')
+    db.init().then(() => app.listen(PORT, () => console.log(`App running on port ${PORT}`)));

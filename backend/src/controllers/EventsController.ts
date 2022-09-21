@@ -1,6 +1,6 @@
 import { Model } from 'mongoose';
 
-import { IEvent } from 'src/models/events';
+import { IEvent } from '../models/events';
 
 type EventBody = Pick<IEvent, 'firstName' | 'lastName' | 'email' | 'eventDate'>;
 

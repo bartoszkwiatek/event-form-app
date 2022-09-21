@@ -12,7 +12,7 @@ export function initApp(RootController: RootController): Express {
     app.use(json());
     app.use(cors());
     app.use('/', createRouter(RootController));
-    app.get('/', (_, res) => res.send('pong'));
+    app.get('/', (_, res) => res.send('ok'));
 
     return app;
 }
