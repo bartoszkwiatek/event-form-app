@@ -1,16 +1,32 @@
 import mongoose from 'mongoose';
 
-class Connection {
-    constructor() {
-        const url = process.env.MONGODB_URI || 'mongodb://mongodb:27017';
+export class Connection {
+    // mongo-memory-server does not work on linux node:alipine hence temporary test database
+    private url =
+        process.env.NODE_ENV === 'test' ? 'mongodb://127.0.0.1:27018' : 'mongodb://mongodb:27017';
 
-        mongoose
-            .connect(url)
-            // eslint-disable-next-line no-console
-            .then(() => console.log('db connection success'))
-            // eslint-disable-next-line no-console
-            .catch(err => console.warn('db connection failed', err));
+    public async init() {
+        await mongoose
+            .connect(this.url)
+            .then(() => console.log(`db connection success: ${this.url}`))
+            .catch(err => console.warn(`db connection fail: ${this.url}`, err));
+        return this;
+    }
+
+    public async drop() {
+        await mongoose.connection.db.dropDatabase();
+        await mongoose.disconnect();
+
+        return this;
+    }
+
+    public async clean() {
+        const collections = await mongoose.connection.db.collections();
+
+        for (const collection of collections) {
+            await collection.drop();
+        }
+
+        return this;
     }
 }
-
-export default new Connection();

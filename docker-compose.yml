@@ -24,6 +24,7 @@ services:
             - /backend/node_modules
         depends_on:
             - mongodb
+            - mongodbtest
         networks:
             - appnetwork
     mongodb:
@@ -35,6 +36,17 @@ services:
         ports:
             - 27017:27017
         command: mongod --noauth
+        networks:
+            - appnetwork
+    mongodbtest:
+        image: mongo
+        restart: always
+        container_name: mongodbtest
+        volumes:
+            - ./database:/data/testdb
+        ports:
+            - 27018:27018
+        command: mongod --noauth --port 27018
         networks:
             - appnetwork
 networks:

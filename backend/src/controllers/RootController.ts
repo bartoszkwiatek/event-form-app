@@ -1,5 +1,5 @@
-import EventsModel from 'src/models/events';
-import EventsController from 'src/controllers/EventsController';
+import EventsModel from '../models/events';
+import EventsController from '../controllers/EventsController';
 
 export function createRootController() {
     const eventsController = new EventsController(EventsModel);

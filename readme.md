@@ -13,9 +13,8 @@ docker compose up
 docker compose stop
 ```
 
-In order to run tests packages need to be installed locally
+In order to run tests packages need to be installed locally in frontend and backend folder
 ```bash
-cd frontend
 npm install
 ```
 
@@ -23,15 +22,21 @@ npm install
 In order to run tests, packages need to be installed locally using `npm install`
 
 ### Frontend unit tests
+in `frontend` folder
 ```bash
 npm test
 ```
 
 ### Frontend e2e tests
-To run e2e project must be running in docker 
+To run e2e project must be running in docker then in `frontend` folder
 ```bash
-docker compose up
 npm test:e2e
+```
+
+### Frontend e2e tests
+To run backend tests project must be running in docker then in `backend` folder
+```bash
+npm test
 ```
 
 ## Backend endpoints 
