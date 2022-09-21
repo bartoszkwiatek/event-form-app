@@ -1,16 +1,9 @@
 import { Router } from 'express';
-import { body, validationResult, ValidationError } from 'express-validator';
+import { validationResult } from 'express-validator';
 
 import { RootController } from 'src/controllers/RootController';
 
-const validator = [
-    body('firstName', 'First name should be non-empty string').isString().notEmpty(),
-    body('lastName', 'Last name should be non-empty string').isString().notEmpty(),
-    body('email', 'Email should be in format address@domain.com').isEmail(),
-    body('eventDate', 'Date should be in format YYYY-MM-DD').exists().isDate().toDate(),
-];
-
-const validatorErrorFormater = ({ msg }: ValidationError) => msg;
+import { eventsValidator, validatorErrorFormater } from './validator';
 
 export function createRouter({ eventsController }: RootController): Router {
     return Router()
@@ -23,7 +16,7 @@ export function createRouter({ eventsController }: RootController): Router {
                 })
                 .catch(next),
         )
-        .post('/events', ...validator, (req, res, next) => {
+        .post('/events', ...eventsValidator, (req, res, next) => {
             const errors = validationResult(req).formatWith(validatorErrorFormater);
 
             if (!errors.isEmpty()) return res.status(422).send(errors.mapped());
