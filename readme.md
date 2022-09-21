@@ -19,7 +19,7 @@ npm install
 ```
 
 ## Tests
-In order to run tests, packages need to be installed locally using `npm install`
+In order to run tests packages need to be installed locally using `npm install`
 
 ### Frontend unit tests
 in `frontend` folder
@@ -28,13 +28,26 @@ npm test
 ```
 
 ### Frontend e2e tests
-To run e2e project must be running in docker then in `frontend` folder
+To run e2e tests project must be running in docker, then in `frontend` folder:
+
+To open cypress 
 ```bash
-npm test:e2e
+npm run cypress
 ```
 
-### Frontend e2e tests
-To run backend tests project must be running in docker then in `backend` folder
+To run headless e2e tests
+
+```bash
+npm run test:e2e
+```
+
+To run e2e tests in browser
+```bash
+npm run test:e2e:browser
+```
+
+### Backend tests
+To run backend tests project must be running in docker, then in `backend` folder
 ```bash
 npm test
 ```
