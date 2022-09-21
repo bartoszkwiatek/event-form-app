@@ -22,23 +22,29 @@ export const EventForm = (): ReactElement => {
         setError(null);
         setSuccess(false);
 
-        const response = await fetch(url, {
-            method: 'POST',
-            body: JSON.stringify(values),
-            headers: {
-                'Content-Type': 'application/json',
-            },
-        });
-        const responseData = await response.json();
-        setLoading(false);
-        if (response.status === 500 || response.status === 422) {
-            setError(responseData);
-            return false;
+        try {
+            const response = await fetch(url, {
+                method: 'POST',
+                body: JSON.stringify(values),
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            });
+            const responseData = await response.json();
+            setLoading(false);
+            if (response.status === 500 || response.status === 422) {
+                setError(responseData);
+                return false;
+            }
+            if (response.status === 201) {
+                setSuccess(true);
+                return true;
+            }
+        } catch {
+            setLoading(false);
+            setError(new Error('Unknown error'));
         }
-        if (response.status === 201) {
-            setSuccess(true);
-            return true;
-        }
+
         return false;
     };
 
