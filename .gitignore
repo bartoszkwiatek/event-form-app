@@ -1,3 +1,5 @@
 node_modules
 database
 .DS_STORE
+frontend/cypress/videos
+frontend/cypress/screenshots

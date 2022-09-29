@@ -21,7 +21,6 @@ export const EventForm = (): ReactElement => {
         setLoading(true);
         setError(null);
         setSuccess(false);
-
         try {
             const response = await fetch(url, {
                 method: 'POST',
@@ -44,7 +43,6 @@ export const EventForm = (): ReactElement => {
             setLoading(false);
             setError(new Error('Unknown error'));
         }
-
         return false;
     };
 
@@ -61,44 +59,52 @@ export const EventForm = (): ReactElement => {
                 validationSchema={formSchema}
                 onSubmit={async (values, { setSubmitting, resetForm }) => {
                     const success = await postForm(values);
-
                     setSubmitting(false);
                     if (success) resetForm();
                 }}
             >
-                <Form>
-                    <TextInput
-                        label="First name"
-                        name="firstName"
-                        type="text"
-                        placeholder="First name"
-                        data-testid="first-name-input"
-                    />
-                    <TextInput
-                        label="Last name"
-                        name="lastName"
-                        type="text"
-                        placeholder="Last name"
-                        data-testid="last-name-input"
-                    />
-                    <TextInput
-                        label="Email address"
-                        name="email"
-                        type="email"
-                        placeholder="address@domain.com"
-                        data-testid="email-input"
-                    />
-                    <DatePicker
-                        label="Event date"
-                        name="eventDate"
-                        data-testid="event-date-input"
-                    />
-                    <div className="button-container">
-                        <button type="submit" data-testid="submit-button">
-                            Submit
-                        </button>
-                    </div>
-                </Form>
+                {formik => {
+                    const { dirty, isValid } = formik;
+                    return (
+                        <Form>
+                            <TextInput
+                                label="First name"
+                                name="firstName"
+                                type="text"
+                                placeholder="First name"
+                                data-testid="first-name-input"
+                            />
+                            <TextInput
+                                label="Last name"
+                                name="lastName"
+                                type="text"
+                                placeholder="Last name"
+                                data-testid="last-name-input"
+                            />
+                            <TextInput
+                                label="Email address"
+                                name="email"
+                                type="email"
+                                placeholder="address@domain.com"
+                                data-testid="email-input"
+                            />
+                            <DatePicker
+                                label="Event date"
+                                name="eventDate"
+                                data-testid="event-date-input"
+                            />
+                            <div className="button-container">
+                                <button
+                                    type="submit"
+                                    data-testid="submit-button"
+                                    disabled={!dirty || !isValid}
+                                >
+                                    Submit
+                                </button>
+                            </div>
+                        </Form>
+                    );
+                }}
             </Formik>
             <DisplayLoading loading={loading} />
             <DisplayError error={error} />
