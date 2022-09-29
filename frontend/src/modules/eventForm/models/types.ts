@@ -5,6 +5,13 @@ export type InputValues = {
     eventDate: string;
 };
 
+export type CorrectFormResponse = {
+    firstName: string;
+    lastName: string;
+    email: string;
+    eventDate: Date;
+};
+
 export type ValidationOutputError = {
     firstName?: string;
     lastName?: string;
