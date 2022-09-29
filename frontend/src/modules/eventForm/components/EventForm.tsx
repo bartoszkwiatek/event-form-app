@@ -1,49 +1,30 @@
 import { Form, Formik } from 'formik';
 import { ReactElement, useState } from 'react';
 
+import { useApi } from '../../../common/utils/useApi';
 import { DatePicker } from '../../../common/components/DatePicker';
 import { TextInput } from '../../../common/components/TextInput';
 import { formSchema } from '../models/formSchema';
-import { InputValues, ValidationOutputError } from '../models/types';
+import { CorrectFormResponse, InputValues } from '../models/types';
 import { DisplayError } from './DisplayError';
 import { DisplayLoading } from './DisplayLoading';
 import { DisplaySuccess } from './DisplaySuccess';
 import './EventForm.scss';
 
-const url = 'http://localhost:4000/events';
+const url = new URL('http://localhost:4000/events');
 
 export const EventForm = (): ReactElement => {
-    const [loading, setLoading] = useState(false);
-    const [error, setError] = useState<null | ValidationOutputError | Error>(null);
-    const [success, setSuccess] = useState(false);
+    const [body, setBody] = useState<RequestInit | null>(null);
+    const { data, isLoading, error } = useApi<CorrectFormResponse>(url, body);
 
-    const postForm = async (values: InputValues): Promise<boolean> => {
-        setLoading(true);
-        setError(null);
-        setSuccess(false);
-        try {
-            const response = await fetch(url, {
-                method: 'POST',
-                body: JSON.stringify(values),
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-            });
-            const responseData = await response.json();
-            setLoading(false);
-            if (response.status === 500 || response.status === 422) {
-                setError(responseData);
-                return false;
-            }
-            if (response.status === 201) {
-                setSuccess(true);
-                return true;
-            }
-        } catch {
-            setLoading(false);
-            setError(new Error('Unknown error'));
-        }
-        return false;
+    const handleSubmit = (values: InputValues) => {
+        setBody({
+            method: 'POST',
+            body: JSON.stringify(values),
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
     };
 
     return (
@@ -57,10 +38,8 @@ export const EventForm = (): ReactElement => {
                     eventDate: '',
                 }}
                 validationSchema={formSchema}
-                onSubmit={async (values, { setSubmitting, resetForm }) => {
-                    const success = await postForm(values);
-                    setSubmitting(false);
-                    if (success) resetForm();
+                onSubmit={async values => {
+                    handleSubmit(values);
                 }}
             >
                 {formik => {
@@ -106,9 +85,9 @@ export const EventForm = (): ReactElement => {
                     );
                 }}
             </Formik>
-            <DisplayLoading loading={loading} />
+            <DisplayLoading loading={isLoading} />
             <DisplayError error={error} />
-            <DisplaySuccess success={success} />
+            <DisplaySuccess success={!!data} />
         </div>
     );
 };
