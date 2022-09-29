@@ -22,8 +22,11 @@
       border: none;
       background-color: #80cbc4;
       cursor: pointer;
-      &:hover {
+      &:hover:not(:disabled) {
         background-color: #4f9b94;
+      }
+      &:disabled {
+        cursor: default;
       }
     }
   }

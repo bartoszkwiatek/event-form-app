@@ -17,6 +17,7 @@ describe('Testing EventForm', () => {
     // since we cannot rely on portlet to be there we need to create temporary one
     it('should check if form is visible', () => {
         cy.get(testidSelector(testIds.EVENT_FORM)).should('be.visible');
+        cy.get(testidSelector(testIds.SUBMIT_BUTTON)).should('be.disabled');
     });
 
     it('should correctly fill form and save data to server', () => {
@@ -40,6 +41,7 @@ describe('Testing EventForm', () => {
                 cy.get(testidSelector(testIds.EVENT_DATE_INPUT))
                     .find('input')
                     .type(correctData.eventDate);
+                cy.get(testidSelector(testIds.SUBMIT_BUTTON)).should('not.be.disabled');
                 cy.get(testidSelector(testIds.SUBMIT_BUTTON)).click();
                 cy.get(testidSelector(testIds.DISPLAY_LOADING_MESSAGE)).should('be.visible');
             });
@@ -78,6 +80,7 @@ describe('Testing EventForm', () => {
                     .find('.error')
                     .should('be.visible')
                     .should('have.text', errorMessages.DATE_REQUIRED);
+                cy.get(testidSelector(testIds.SUBMIT_BUTTON)).should('be.disabled');
             });
     });
 });
