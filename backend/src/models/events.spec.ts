@@ -5,9 +5,11 @@ import { app, db } from '../index';
 import EventsModel from './events';
 
 const eventData = {
-    firstName: 'Name',
-    lastName: 'Surname',
+    title: 'Event title',
+    shortDescription: 'Short desc',
+    fullDescription: 'Full description it is',
     email: 'email@email.com',
+    location: 'Online event',
     eventDate: new Date('2022-02-22'),
 };
 
@@ -41,8 +43,10 @@ describe('EventsModel', () => {
         const savedEvent = await EventsModel.create(eventData);
         // Object Id should be defined when successfully saved to MongoDB.
         expect(savedEvent._id).toBeDefined();
-        expect(savedEvent.firstName).toBe(eventData.firstName);
-        expect(savedEvent.lastName).toBe(eventData.lastName);
+        expect(savedEvent.title).toBe(eventData.title);
+        expect(savedEvent.shortDescription).toBe(eventData.shortDescription);
+        expect(savedEvent.fullDescription).toBe(eventData.fullDescription);
+        expect(savedEvent.location).toBe(eventData.location);
         expect(savedEvent.email).toBe(eventData.email);
         expect(savedEvent.eventDate).toBe(eventData.eventDate);
     });
@@ -61,8 +65,8 @@ describe('EventsModel', () => {
     });
 
     // It should us tell us the errors in on email field.
-    it('create user without required field should failed', async () => {
-        const eventDataWithoutRequiredField = { firstName: 'First' };
+    it('create event without required field should failed', async () => {
+        const eventDataWithoutRequiredField = { title: 'title' };
         let err;
         try {
             await EventsModel.create(eventDataWithoutRequiredField);

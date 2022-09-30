@@ -1,23 +1,33 @@
 import mongoose from 'mongoose';
 
 export interface IEvent extends mongoose.Document {
-    firstName: string;
-    lastName: string;
+    title: string;
+    shortDescription: string;
+    fullDescription: string;
     email: string;
+    location: string;
     eventDate: Date;
 }
 
 const eventsSchema = new mongoose.Schema<IEvent>(
     {
-        firstName: {
+        title: {
             type: String,
             required: true,
         },
-        lastName: {
+        shortDescription: {
+            type: String,
+            required: true,
+        },
+        fullDescription: {
             type: String,
             required: true,
         },
         email: {
+            type: String,
+            required: true,
+        },
+        location: {
             type: String,
             required: true,
         },
