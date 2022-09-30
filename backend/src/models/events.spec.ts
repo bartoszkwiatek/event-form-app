@@ -16,14 +16,13 @@ const eventData = {
 let server: Server;
 
 beforeAll(async () => {
-    await db
-        .init()
-        .then(
-            () =>
-                (server = app.listen(process.env.PORT, () =>
-                    console.log(`App running on port ${process.env.PORT}`),
-                )),
-        );
+    await db.init().then(
+        () =>
+            (server = app.listen(process.env.PORT, () =>
+                // eslint-disable-next-line no-console
+                console.log(`App running on port ${process.env.PORT}`),
+            )),
+    );
 });
 
 afterEach(async () => {

@@ -26,6 +26,7 @@ module.exports = {
         'array-callback-return': ['warn'],
         'block-scoped-var': ['error'],
         'max-lines': ['error', { max: 250, skipComments: true }],
+        'no-console': 'warn',
         'prefer-const': 'warn',
         'prefer-template': 'warn',
         'no-param-reassign': 'error',

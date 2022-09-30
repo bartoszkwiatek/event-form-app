@@ -1,4 +1,4 @@
-import { body, ValidationError } from 'express-validator';
+import { body, param, ValidationError } from 'express-validator';
 
 export enum eventsValidatorMessages {
     TITLE = 'Title should string 8-64 characters',
@@ -7,9 +7,12 @@ export enum eventsValidatorMessages {
     LOCATION = 'Location should be string 8-64 characters',
     EMAIL = 'Email should be in format address@domain.com',
     EVENT_DATE = 'Date should be in format YYYY-MM-DD',
+    EVENT_ID = 'Event id is not correct',
 }
 
-export const eventsValidator = [
+export const eventIdValidator = [param('eventId', eventsValidatorMessages.EVENT_ID).isMongoId()];
+
+export const eventsBodyValidator = [
     body('title', eventsValidatorMessages.TITLE).isString().isLength({ min: 8, max: 64 }),
     body('shortDescription', eventsValidatorMessages.SHORT_DESCRIPTION)
         .isString()

@@ -9,4 +9,5 @@ const rootService = createRootController();
 export const app = initApp(rootService);
 
 if (process.env.NODE_ENV !== 'test')
+    // eslint-disable-next-line no-console
     db.init().then(() => app.listen(PORT, () => console.log(`App running on port ${PORT}`)));
