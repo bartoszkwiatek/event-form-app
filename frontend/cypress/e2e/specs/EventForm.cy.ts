@@ -3,9 +3,11 @@ import { errorMessages } from '../../../src/modules/eventForm/models/formSchema'
 
 describe('Testing EventForm', () => {
     const correctData = {
-        firstName: 'First name',
-        lastName: 'Last name',
-        email: 'correct@email.com',
+        title: 'Event title',
+        shortDescription: 'Short desc',
+        fullDescription: 'Full description it is',
+        email: 'email@email.com',
+        location: 'Online event',
         eventDate: '1993-08-14',
     };
 
@@ -31,12 +33,16 @@ describe('Testing EventForm', () => {
         cy.get(testidSelector(testIds.EVENT_FORM))
             .should('be.visible')
             .within(() => {
-                cy.get(testidSelector(testIds.FIRST_NAME_INPUT))
+                cy.get(testidSelector(testIds.TITLE_INPUT)).find('input').type(correctData.title);
+                cy.get(testidSelector(testIds.SHORT_DESCRIPTION_INPUT))
+                    .find('textarea')
+                    .type(correctData.shortDescription);
+                cy.get(testidSelector(testIds.FULL_DESCRIPTION_INPUT))
+                    .find('textarea')
+                    .type(correctData.fullDescription);
+                cy.get(testidSelector(testIds.LOCATION_INPUT))
                     .find('input')
-                    .type(correctData.firstName);
-                cy.get(testidSelector(testIds.LAST_NAME_INPUT))
-                    .find('input')
-                    .type(correctData.lastName);
+                    .type(correctData.location);
                 cy.get(testidSelector(testIds.EMAIL_INPUT)).find('input').type(correctData.email);
                 cy.get(testidSelector(testIds.EVENT_DATE_INPUT))
                     .find('input')
@@ -52,19 +58,30 @@ describe('Testing EventForm', () => {
 
     it('should display validation error after blurring input', () => {
         const incorrectEmail = 'asdf.com';
+        const tooShort = 'short';
         cy.get(testidSelector(testIds.EVENT_FORM))
             .should('be.visible')
             .within(() => {
-                cy.get(testidSelector(testIds.FIRST_NAME_INPUT)).find('input').focus().blur();
-                cy.get(testidSelector(testIds.FIRST_NAME_INPUT))
+                cy.get(testidSelector(testIds.TITLE_INPUT)).find('input').focus().blur();
+                cy.get(testidSelector(testIds.TITLE_INPUT))
                     .find('.error')
                     .should('be.visible')
-                    .should('have.text', errorMessages.FIRST_NAME_REQUIRED);
-                cy.get(testidSelector(testIds.LAST_NAME_INPUT)).find('input').focus().blur();
-                cy.get(testidSelector(testIds.LAST_NAME_INPUT))
+                    .should('have.text', errorMessages.TITLE_REQUIRED);
+                cy.get(testidSelector(testIds.SHORT_DESCRIPTION_INPUT))
+                    .find('input')
+                    .focus()
+                    .blur();
+                cy.get(testidSelector(testIds.SHORT_DESCRIPTION_INPUT))
                     .find('.error')
                     .should('be.visible')
-                    .should('have.text', errorMessages.LAST_NAME_REQUIRED);
+                    .should('have.text', errorMessages.SHORT_DESCRIPTION_REQUIRED);
+                cy.get(testidSelector(testIds.SHORT_DESCRIPTION_INPUT))
+                    .find('input')
+                    .type(tooShort);
+                cy.get(testidSelector(testIds.SHORT_DESCRIPTION_INPUT))
+                    .find('.error')
+                    .should('be.visible')
+                    .should('have.text', errorMessages.TOO_SHORT);
                 cy.get(testidSelector(testIds.EMAIL_INPUT)).find('input').focus().blur();
                 cy.get(testidSelector(testIds.EMAIL_INPUT))
                     .find('.error')

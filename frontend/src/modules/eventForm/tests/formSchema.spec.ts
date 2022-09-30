@@ -1,59 +1,54 @@
 import { formSchema, errorMessages } from '../models/formSchema';
 
 describe('Client form validation', () => {
-    it('Should be valid', () => {
-        const correctData = {
-            firstName: 'First name',
-            lastName: 'Last name',
-            email: 'correct@email.com',
-            eventDate: '1993-08-14',
-        };
+    const correctData = {
+        title: 'Event title',
+        shortDescription: 'Short desc',
+        fullDescription: 'Full description it is',
+        email: 'email@email.com',
+        location: 'Online event',
+        eventDate: '1993-08-14',
+    };
 
+    it('Should be valid', () => {
         expect(formSchema.isValidSync(correctData)).toEqual(true);
     });
 
-    it('Should not be valid and throw first name required error', () => {
+    it('Should not be valid and throw title required error', () => {
         const incorrectData = {
-            lastName: 'Last name',
-            email: 'correct@email.com',
-            eventDate: '1993-08-14',
+            ...correctData,
+            title: undefined,
         };
 
         expect(formSchema.isValidSync(incorrectData)).toEqual(false);
         expect(() => formSchema.validateSync(incorrectData)).toThrowError(
-            errorMessages.FIRST_NAME_REQUIRED,
+            errorMessages.TITLE_REQUIRED,
         );
     });
-    it('Should not be valid and throw last name required error', () => {
+    it('Should not be valid and throw short desc required error', () => {
         const incorrectData = {
-            firstName: 'First name',
-            email: 'correct@email.com',
-            eventDate: '1993-08-14',
+            ...correctData,
+            shortDescription: undefined,
         };
-
         expect(formSchema.isValidSync(incorrectData)).toEqual(false);
         expect(() => formSchema.validateSync(incorrectData)).toThrowError(
-            errorMessages.LAST_NAME_REQUIRED,
+            errorMessages.SHORT_DESCRIPTION_REQUIRED,
         );
     });
-    it('Should not be valid and throw email required error', () => {
+
+    it('Should not be valid and throw too short error', () => {
         const incorrectData = {
-            firstName: 'First name',
-            lastName: 'Last name',
-            eventDate: '1993-08-14',
+            ...correctData,
+            fullDescription: 'short',
         };
 
         expect(formSchema.isValidSync(incorrectData)).toEqual(false);
-        expect(() => formSchema.validateSync(incorrectData)).toThrowError(
-            errorMessages.EMAIL_REQUIRED,
-        );
+        expect(() => formSchema.validateSync(incorrectData)).toThrowError(errorMessages.TOO_SHORT);
     });
     it('Should not be valid and throw email format error', () => {
         const incorrectData = {
-            firstName: 'First name',
-            lastName: 'Last name',
-            email: 'incorrectemail.com',
-            eventDate: '1993-08-14',
+            ...correctData,
+            email: 'aasdf.asdf',
         };
 
         expect(formSchema.isValidSync(incorrectData)).toEqual(false);
@@ -64,22 +59,7 @@ describe('Client form validation', () => {
 
     it('Should not be valid and throw date required error', () => {
         const incorrectData = {
-            firstName: 'First name',
-            lastName: 'Last name',
-            email: 'correct@email.com',
-        };
-
-        expect(formSchema.isValidSync(incorrectData)).toEqual(false);
-        expect(() => formSchema.validateSync(incorrectData)).toThrowError(
-            errorMessages.DATE_REQUIRED,
-        );
-    });
-
-    it('Should not be valid and throw date required error', () => {
-        const incorrectData = {
-            firstName: 'First name',
-            lastName: 'Last name',
-            email: 'correct@email.com',
+            ...correctData,
             eventDate: '1993534-08-14',
         };
 

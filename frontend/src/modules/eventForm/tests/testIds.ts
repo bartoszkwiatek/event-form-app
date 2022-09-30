@@ -1,7 +1,9 @@
 export const testIds = {
     EVENT_FORM: 'event-form',
-    FIRST_NAME_INPUT: 'first-name-input',
-    LAST_NAME_INPUT: 'last-name-input',
+    TITLE_INPUT: 'title-input',
+    SHORT_DESCRIPTION_INPUT: 'short_description_input',
+    FULL_DESCRIPTION_INPUT: 'full_description_input',
+    LOCATION_INPUT: 'location-input',
     EMAIL_INPUT: 'email-input',
     EVENT_DATE_INPUT: 'event-date-input',
     DISPLAY_ERROR_MESSAGE: 'display-error-message',

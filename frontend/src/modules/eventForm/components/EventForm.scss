@@ -1,6 +1,6 @@
 .event-form {
   font-family: 'Open sans', sans-serif;
-  min-width: 300px;
+  min-width: min(500px, 90vw);
   width: max-content;
   margin: 2rem auto;
   padding: 1rem;

@@ -4,6 +4,7 @@ import { ReactElement, useState } from 'react';
 import { useApi } from '../../../common/utils/useApi';
 import { DatePicker } from '../../../common/components/DatePicker';
 import { TextInput } from '../../../common/components/TextInput';
+import { TextArea } from '../../../common/components/TextArea';
 import { formSchema } from '../models/formSchema';
 import { CorrectFormResponse, InputValues } from '../models/types';
 import { DisplayError } from './DisplayError';
@@ -32,8 +33,11 @@ export const EventForm = (): ReactElement => {
             <h2 className="event-form-title">Create event</h2>
             <Formik
                 initialValues={{
-                    firstName: '',
-                    lastName: '',
+                    id: '',
+                    title: '',
+                    shortDescription: '',
+                    fullDescritption: '',
+                    location: '',
                     email: '',
                     eventDate: '',
                 }}
@@ -47,18 +51,30 @@ export const EventForm = (): ReactElement => {
                     return (
                         <Form>
                             <TextInput
-                                label="First name"
-                                name="firstName"
+                                label="Event title"
+                                name="title"
                                 type="text"
-                                placeholder="First name"
-                                data-testid="first-name-input"
+                                placeholder="Event title"
+                                data-testid="title-input"
+                            />
+                            <TextArea
+                                label="Short description"
+                                name="shortDescription"
+                                placeholder="Short description"
+                                data-testid="short-description-input"
+                            />
+                            <TextArea
+                                label="Full description"
+                                name="fullDescription"
+                                placeholder="Full description"
+                                data-testid="full-description-input"
                             />
                             <TextInput
-                                label="Last name"
-                                name="lastName"
+                                label="Location"
+                                name="location"
                                 type="text"
-                                placeholder="Last name"
-                                data-testid="last-name-input"
+                                placeholder="Event location"
+                                data-testid="location-input"
                             />
                             <TextInput
                                 label="Email address"

@@ -15,19 +15,19 @@ describe('Test display error component with different props', () => {
 
     test('ValidationInputError', () => {
         const error = {
-            firstName: 'first name error',
+            title: 'title error',
         };
         render(<DisplayError error={error} />);
 
         const message = screen.getAllByTestId(testIds.DISPLAY_ERROR_MESSAGE);
         expect(message).toHaveLength(1);
-        expect(message[0]).toHaveTextContent(error.firstName);
+        expect(message[0]).toHaveTextContent(error.title);
     });
 
     test('ValidationInputError', () => {
         const error = {
-            firstName: 'first name error',
-            lastName: 'last name error',
+            title: 'title error',
+            shortDescription: 'short descriptionerror',
         };
         render(<DisplayError error={error} />);
 
