@@ -36,7 +36,7 @@ export const EventForm = (): ReactElement => {
                     id: '',
                     title: '',
                     shortDescription: '',
-                    fullDescritption: '',
+                    fullDescription: '',
                     location: '',
                     email: '',
                     eventDate: '',
