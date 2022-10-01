@@ -32,10 +32,10 @@ const doFetch = async <T>(path: URL, options?: RequestInit): Promise<T> => {
         throw await res.json();
     }
     const responseData = await res.json();
-    if (res.status === 500 || res.status === 422) {
+    if (res.status === 500 || res.status === 422 || res.status === 404) {
         throw responseData;
     }
-    if (res.status === 201) {
+    if (res.status === 201 || res.status === 200) {
         return responseData;
     }
     throw await res.json();
