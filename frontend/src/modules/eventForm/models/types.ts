@@ -1,5 +1,4 @@
 export type InputValues = {
-    id: string;
     title: string;
     shortDescription: string;
     fullDescription: string;
@@ -8,6 +7,6 @@ export type InputValues = {
     eventDate: string;
 };
 
-export type CorrectFormResponse = InputValues;
+export type CorrectFormResponse = InputValues & { id: string };
 
 export type ValidationOutputError = Partial<InputValues>;

@@ -10,7 +10,7 @@ const eventData = {
     fullDescription: 'Full description it is',
     email: 'email@email.com',
     location: 'Online event',
-    eventDate: new Date('2022-02-22'),
+    eventDate: '2019-09-18T19:00:52Z',
 };
 
 let server: Server;

@@ -1,8 +1,8 @@
 export const testIds = {
     EVENT_FORM: 'event-form',
     TITLE_INPUT: 'title-input',
-    SHORT_DESCRIPTION_INPUT: 'short_description_input',
-    FULL_DESCRIPTION_INPUT: 'full_description_input',
+    SHORT_DESCRIPTION_INPUT: 'short-description-input',
+    FULL_DESCRIPTION_INPUT: 'full-description-input',
     LOCATION_INPUT: 'location-input',
     EMAIL_INPUT: 'email-input',
     EVENT_DATE_INPUT: 'event-date-input',

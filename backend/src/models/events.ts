@@ -6,7 +6,7 @@ export interface IEvent extends mongoose.Document {
     fullDescription: string;
     email: string;
     location: string;
-    eventDate: Date;
+    eventDate: string;
 }
 
 const eventsSchema = new mongoose.Schema<IEvent>(
@@ -32,7 +32,7 @@ const eventsSchema = new mongoose.Schema<IEvent>(
             required: true,
         },
         eventDate: {
-            type: Date,
+            type: String,
             required: true,
         },
     },

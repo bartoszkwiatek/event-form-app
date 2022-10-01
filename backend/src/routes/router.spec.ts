@@ -39,7 +39,7 @@ describe('POST: /events route to insert data', () => {
             fullDescription: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit.',
             email: 'hiromu@arakawa.com',
             location: 'Random location',
-            eventDate: '2022-02-22',
+            eventDate: '2019-09-18T19:00:52Z',
         };
 
         const expectedResBody = {
@@ -48,7 +48,7 @@ describe('POST: /events route to insert data', () => {
             fullDescription: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit.',
             email: 'hiromu@arakawa.com',
             location: 'Random location',
-            eventDate: '2022-02-22T00:00:00.000Z',
+            eventDate: '2019-09-18T19:00:52Z',
         };
 
         const res = await addEvent(reqBody);
@@ -64,7 +64,7 @@ describe('POST: /events route to insert data', () => {
             fullDescription: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit.',
             email: 'hiromu@arakawa.com',
             location: 'Random location',
-            eventDate: '2022-02-22',
+            eventDate: '2019-09-18T19:00:52Z',
         };
 
         const expectedErrorBody = {
@@ -111,7 +111,7 @@ describe('GET: /events route to retrieve data', () => {
             fullDescription: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit.',
             email: 'hiromu@arakawa.com',
             location: 'Random location',
-            eventDate: '2022-02-22',
+            eventDate: '2019-09-18T19:00:52Z',
         };
 
         const reqBody2 = {
@@ -120,7 +120,7 @@ describe('GET: /events route to retrieve data', () => {
             fullDescription: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit.',
             email: 'hiromu@arakawa.com',
             location: 'Random location',
-            eventDate: '2022-02-22',
+            eventDate: '2019-09-18T19:00:52Z',
         };
 
         // Add two events
@@ -149,7 +149,7 @@ describe('GET: /events route to retrieve data', () => {
             fullDescription: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit.',
             email: 'hiromu@arakawa.com',
             location: 'Random location',
-            eventDate: '2022-02-22',
+            eventDate: '2019-09-18T19:00:52Z',
         };
 
         // Add two events
@@ -183,7 +183,7 @@ describe('PUT: /events route to update data', () => {
             fullDescription: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit.',
             email: 'hiromu@arakawa.com',
             location: 'Random location',
-            eventDate: '2022-02-22',
+            eventDate: '2019-09-18T19:00:52Z',
         };
 
         const reqBody2 = {
@@ -192,7 +192,7 @@ describe('PUT: /events route to update data', () => {
             fullDescription: 'Lorem ipsum dolor sit amet consectetur, adipisicing',
             email: 'ara@ara.com',
             location: 'Random location',
-            eventDate: '2022-02-22',
+            eventDate: '2019-09-18T19:00:52Z',
         };
 
         const expectedResBody = {
@@ -201,7 +201,7 @@ describe('PUT: /events route to update data', () => {
             fullDescription: 'Lorem ipsum dolor sit amet consectetur, adipisicing',
             email: 'ara@ara.com',
             location: 'Random location',
-            eventDate: '2022-02-22T00:00:00.000Z',
+            eventDate: '2019-09-18T19:00:52Z',
         };
 
         const res1 = await addEvent(reqBody1);
@@ -220,7 +220,7 @@ describe('PUT: /events route to update data', () => {
             fullDescription: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit.',
             email: 'hiromu@arakawa.com',
             location: 'Random location',
-            eventDate: '2022-02-22',
+            eventDate: '2019-09-18T19:00:52Z',
         };
         const res = await request(app).put('/events/63371a90082b53f43ff241df').send(reqBody);
 
@@ -266,7 +266,7 @@ describe('DELETE: /events route to delete data', () => {
             fullDescription: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit.',
             email: 'hiromu@arakawa.com',
             location: 'Random location',
-            eventDate: '2022-02-22',
+            eventDate: '2019-09-18T19:00:52Z',
         };
 
         const res1 = await addEvent(reqBody);

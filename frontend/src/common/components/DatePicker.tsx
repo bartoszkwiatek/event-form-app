@@ -1,24 +1,32 @@
+import { TextField } from '@mui/material';
+import { DateTimePicker } from '@mui/x-date-pickers';
 import { FieldHookConfig, useField, useFormikContext } from 'formik';
-import './DatePicker.scss';
 
 export const DatePicker = (
     props: FieldHookConfig<string> & { label: string; 'data-testid': string },
 ) => {
     const { setFieldValue } = useFormikContext();
-    const [field, meta] = useField(props);
+    const [field, meta, helper] = useField(props);
+
     return (
         <div className="date-picker" data-testid={props['data-testid']}>
-            <label htmlFor={props.name}>{props.label}</label>
-            <input
-                className="input"
-                type="date"
+            <DateTimePicker
                 {...field}
-                placeholder={props.placeholder}
-                onChange={event => {
-                    setFieldValue(field.name, event.target.value);
+                label={props.label}
+                inputFormat="dd.MM.yyyy HH:mm"
+                renderInput={params => (
+                    <TextField
+                        {...params}
+                        error={meta.touched && !!meta.error}
+                        helperText={(meta.touched && meta.error) || ' '}
+                        onBlur={() => helper.setTouched(true)}
+                    />
+                )}
+                onChange={value => {
+                    setFieldValue(field.name, value);
                 }}
+                ampm={false}
             />
-            {meta.touched && meta.error ? <div className="error">{meta.error}</div> : null}
         </div>
     );
 };

@@ -1,7 +1,7 @@
 import { useEffect, useReducer } from 'react';
 import { URL } from 'url';
 
-import { ValidationOutputError } from '@/modules/eventForm/models/types';
+import { ValidationOutputError } from '@src/modules/eventForm/models/types';
 
 type State<T> =
     | {
