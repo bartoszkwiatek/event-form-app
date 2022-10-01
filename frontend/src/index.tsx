@@ -2,7 +2,6 @@ import React from 'react';
 import { createRoot } from 'react-dom/client';
 import { RouterProvider } from 'react-router-dom';
 
-import './index.scss';
 import reportWebVitals from './reportWebVitals';
 import { router } from './router/router';
 

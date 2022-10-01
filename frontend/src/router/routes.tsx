@@ -1,21 +1,41 @@
 import { EventList } from '../modules/eventList/components/EventList';
 import { EventForm } from '../modules/eventForm/components/EventForm';
+import { Event } from '../modules/eventList/components/Event';
+import { NotFound } from '../common/components/NotFound';
 
-type RouteObject = {
-    name: string;
-    path: string;
-    element: JSX.Element;
-};
-
-export const routes: RouteObject[] = [
+type RouteObject = Record<
+    string,
     {
-        name: 'Browse events',
-        path: '/list',
+        title: string;
+        path: string;
+        element: JSX.Element | React.ReactNode;
+    }
+>;
+
+export const routes: RouteObject = {
+    list: {
+        title: 'Event list',
+        path: 'list',
         element: <EventList />,
     },
-    {
-        name: 'Create event',
+    details: {
+        title: 'Event details',
+        path: 'list/:id',
+        element: <Event />,
+    },
+    create: {
+        title: 'Create event',
         path: '/create',
         element: <EventForm />,
     },
-];
+    edit: {
+        title: 'Edit event',
+        path: '/edit/:id',
+        element: <EventForm />,
+    },
+    notFound: {
+        title: 'Not found',
+        path: '*',
+        element: <NotFound />,
+    },
+};

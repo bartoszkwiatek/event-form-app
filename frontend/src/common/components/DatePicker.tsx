@@ -1,4 +1,4 @@
-import { TextField } from '@mui/material';
+import { Box, TextField } from '@mui/material';
 import { DateTimePicker } from '@mui/x-date-pickers';
 import { FieldHookConfig, useField, useFormikContext } from 'formik';
 
@@ -9,7 +9,7 @@ export const DatePicker = (
     const [field, meta, helper] = useField(props);
 
     return (
-        <div className="date-picker" data-testid={props['data-testid']}>
+        <Box data-testid={props['data-testid']}>
             <DateTimePicker
                 {...field}
                 label={props.label}
@@ -27,6 +27,6 @@ export const DatePicker = (
                 }}
                 ampm={false}
             />
-        </div>
+        </Box>
     );
 };

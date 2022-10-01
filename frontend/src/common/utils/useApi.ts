@@ -1,7 +1,7 @@
 import { useEffect, useReducer } from 'react';
 import { URL } from 'url';
 
-import { ValidationOutputError } from '@src/modules/eventForm/models/types';
+import { ValidationOutputError } from '../../modules/eventForm/models/types';
 
 type State<T> =
     | {
@@ -25,7 +25,7 @@ type State<T> =
           readonly error: Error | ValidationOutputError;
       };
 
-const doFetch = async <T>(path: URL, options?: RequestInit): Promise<T> => {
+const doFetch = async <T>(path: URL | string, options?: RequestInit): Promise<T> => {
     const res = await fetch(path, options);
 
     if (!res.ok) {
@@ -64,7 +64,7 @@ const createApiReducer =
         }
     };
 
-export const useApi = <T>(path: URL, options?: RequestInit | null): State<T> => {
+export const useApi = <T>(path: URL | string, options?: RequestInit | null): State<T> => {
     const apiReducer = createApiReducer<T>();
     const [response, dispatch] = useReducer(apiReducer, {
         data: null,

@@ -1,4 +1,6 @@
-// import './EventForm.scss';
+import { Typography } from '@mui/material';
+import { Container } from '@mui/system';
+
 import { useApi } from '../../../common/utils/useApi';
 import { ShortEventData } from '../models/types';
 import { EventListElement } from './EventListElement';
@@ -9,10 +11,12 @@ export const EventList = () => {
     const { data, isLoading } = useApi<ShortEventData[]>(url);
 
     return (
-        <div className="event-list" data-testid="event-list">
-            <h2 className="event-list-title">Incoming events</h2>
+        <Container data-testid="event-list">
+            <Typography variant="h4" component="h3">
+                Incoming events
+            </Typography>
             {isLoading && <p>Loading</p>}
             {data && data.map(event => <EventListElement key={event.id} eventData={event} />)}
-        </div>
+        </Container>
     );
 };
