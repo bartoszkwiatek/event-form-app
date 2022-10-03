@@ -15,6 +15,8 @@ import { routes } from '../../router/routes';
 export const Sidebar = (): ReactElement => {
     return (
         <Paper
+            elevation={0}
+            square
             component="aside"
             sx={{
                 width: 240,
@@ -24,7 +26,7 @@ export const Sidebar = (): ReactElement => {
             <Toolbar />
             <Divider />
             <List component="nav">
-                {[routes.list, routes.create].map(({ title, path }) => (
+                {[routes.create, routes.list].map(({ title, path }) => (
                     <ListItem key={title} disablePadding>
                         <ListItemButton component={NavLink} to={path}>
                             <ListItemText>{title}</ListItemText>

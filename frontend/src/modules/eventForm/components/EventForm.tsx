@@ -1,12 +1,13 @@
 import { Form, Formik } from 'formik';
 import { ReactElement, useState } from 'react';
-import { Button, Container, Grid, Paper, Typography } from '@mui/material';
+import { Button, Container, Grid, Paper } from '@mui/material';
 import { Stack } from '@mui/system';
 
 import { useApi } from '../../../common/utils/useApi';
 import { DatePicker } from '../../../common/components/DatePicker';
 import { TextInput } from '../../../common/components/TextInput';
 import { TextArea } from '../../../common/components/TextArea';
+import { SubpageHeader } from '../../../common/components/SubpageHeader';
 import { formSchema } from '../models/formSchema';
 import { CorrectFormResponse, InputValues } from '../models/types';
 import { DisplayError } from './DisplayError';
@@ -31,28 +32,26 @@ export const EventForm = (): ReactElement => {
     };
 
     return (
-        <Paper>
-            <Container data-testid="event-form" sx={{ padding: 2 }}>
-                <Typography variant="h4" component="h3">
-                    Create event
-                </Typography>
-                <Formik
-                    initialValues={{
-                        title: '',
-                        shortDescription: '',
-                        fullDescription: '',
-                        location: '',
-                        email: '',
-                        eventDate: '',
-                    }}
-                    validationSchema={formSchema}
-                    onSubmit={async values => {
-                        handleSubmit(values);
-                    }}
-                >
-                    {formik => {
-                        const { dirty, isValid } = formik;
-                        return (
+        <Container data-testid="event-form">
+            <SubpageHeader>Create event</SubpageHeader>
+            <Formik
+                initialValues={{
+                    title: '',
+                    shortDescription: '',
+                    fullDescription: '',
+                    location: '',
+                    email: '',
+                    eventDate: '',
+                }}
+                validationSchema={formSchema}
+                onSubmit={async values => {
+                    handleSubmit(values);
+                }}
+            >
+                {formik => {
+                    const { dirty, isValid } = formik;
+                    return (
+                        <Paper square elevation={0} sx={{ padding: 4, paddingTop: 2 }}>
                             <Form>
                                 <Grid container columnSpacing={2} columns={{ xs: 1, md: 2 }}>
                                     <Grid item xs={1}>
@@ -105,13 +104,7 @@ export const EventForm = (): ReactElement => {
                                     </Grid>
 
                                     <Grid item xs={2}>
-                                        <Stack
-                                            // justifyContent="center"
-                                            spacing={2}
-                                            direction="row"
-                                            marginTop={2}
-                                            marginBottom={2}
-                                        >
+                                        <Stack spacing={2} direction="row">
                                             <Button
                                                 color="secondary"
                                                 variant="contained"
@@ -135,13 +128,13 @@ export const EventForm = (): ReactElement => {
                                     </Grid>
                                 </Grid>
                             </Form>
-                        );
-                    }}
-                </Formik>
-                <DisplayLoading loading={isLoading} />
-                <DisplayError error={error} />
-                <DisplaySuccess success={!!data} />
-            </Container>
-        </Paper>
+                        </Paper>
+                    );
+                }}
+            </Formik>
+            <DisplayLoading loading={isLoading} />
+            <DisplayError error={error} />
+            <DisplaySuccess success={!!data} />
+        </Container>
     );
 };

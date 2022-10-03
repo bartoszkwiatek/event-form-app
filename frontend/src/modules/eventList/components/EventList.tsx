@@ -1,6 +1,6 @@
-import { Typography } from '@mui/material';
 import { Container } from '@mui/system';
 
+import { SubpageHeader } from '../../../common/components/SubpageHeader';
 import { useApi } from '../../../common/utils/useApi';
 import { ShortEventData } from '../models/types';
 import { EventListElement } from './EventListElement';
@@ -12,9 +12,7 @@ export const EventList = () => {
 
     return (
         <Container data-testid="event-list">
-            <Typography variant="h4" component="h3">
-                Incoming events
-            </Typography>
+            <SubpageHeader>Incoming events</SubpageHeader>
             {isLoading && <p>Loading</p>}
             {data && data.map(event => <EventListElement key={event.id} eventData={event} />)}
         </Container>

@@ -26,7 +26,7 @@ export const EventListElement = ({ eventData }: { eventData: ShortEventData }) =
         navigator.clipboard.writeText(`${location.href}/${eventData.id}`);
     };
     return (
-        <Card data-testid="event-form" sx={{ marginBottom: 4 }}>
+        <Card square elevation={0} data-testid="event-form" sx={{ marginBottom: 4 }}>
             <CardHeader
                 avatar={
                     <Tooltip title={`Added by: ${eventData.email}`}>
